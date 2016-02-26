@@ -3,8 +3,8 @@
 [![Circle CI](https://circleci.com/gh/StreakYC/react-smooth-collapse.svg?style=shield)](https://circleci.com/gh/StreakYC/react-smooth-collapse)
 [![npm version](https://badge.fury.io/js/react-smooth-collapse.svg)](https://badge.fury.io/js/react-smooth-collapse)
 
-This component lets animate the height of an element to reveal or hide its
-contents. The animation automatically aligns with the natural height of the
+This component lets you animate the height of an element to reveal or hide its
+contents. The animation automatically adjusts to the natural height of the
 contents.
 
 ![Example](https://streakyc.github.io/react-smooth-collapse/video/showhide.gif)
