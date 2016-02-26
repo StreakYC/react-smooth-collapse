@@ -29,6 +29,26 @@ You can build the example with live editing enabled (using
 npm run example-watch
 ```
 
+**Q:** Why would I use this when I could set a transition rule for height on an
+element, and then change the height from "auto" to "0"?
+
+**A:** You can't animate from "auto". This component has the height set to
+"auto" while the element is expanded, and when the element is set to collapse,
+the element's height is set to equal its current height, and then set to "0" so
+that it animates shrinking correctly.
+
+**Q:** Couldn't I animate shrinking by setting a transition rule for
+max-height, setting max-height to a very large value when the element is
+expanded, and then set max-height to "0" when the element is collapsed?
+
+**A:** That won't animate with the given duration and won't fully respect your
+timing function. For example, if you have an element that currently has a
+height of 100px, a max-height of 10000px, and a transition rule of "max-height
+1s linear", then it will take 0.99 seconds before the element appears to start
+shrinking, and then it will fully shrink in 0.01 seconds. If you use a timing
+function like "ease" instead of "linear", then the easing will only be apparent
+while the element finishes shrinking to 0 or begins expanding from 0.
+
 ## SmoothCollapse
 
 This module exports the `SmoothCollapse` React component. The children of the
