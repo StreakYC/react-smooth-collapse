@@ -7,7 +7,7 @@ This component lets animate the height of an element to reveal or hide its
 contents. The animation automatically aligns with the natural height of the
 contents.
 
-[TODO put a gif here]
+![Example](https://streakyc.github.io/react-smooth-collapse/video/showhide.gif)
 
 An example can be tried here:
 
