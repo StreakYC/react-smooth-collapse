@@ -31,10 +31,21 @@ npm run example-watch
 
 ## SmoothCollapse
 
-This module exports the `SmoothCollapse` React component, which takes the
-following props:
+This module exports the `SmoothCollapse` React component. The children of the
+component should be the contents you want to show or hide. The component also
+takes the following props:
 
-[TODO]
+* `expanded` must be a boolean controlling whether to show the children.
+* `onChangeEnd` may be a function which will be called whenever a show or hide
+ animation is completed.
+* `heightTransition` may be a string and is used for customizing the animation.
+ This value is prefixed with "height " and is set as the CSS transition
+ property of the SmoothCollapse element. This property defaults to ".25s ease".
+
+If the SmoothCollapse component starts out with expanded set to false, then the
+children are not rendered until the first time the component is expanded. After
+the component has been expanded once, the children stay rendered so that they
+don't lose their state when they're hidden.
 
 ## Types
 
