@@ -3,12 +3,13 @@
 [![Circle CI](https://circleci.com/gh/StreakYC/react-smooth-collapse.svg?style=shield)](https://circleci.com/gh/StreakYC/react-smooth-collapse)
 [![npm version](https://badge.fury.io/js/react-smooth-collapse.svg)](https://badge.fury.io/js/react-smooth-collapse)
 
-This component lets you make a user re-orderable list that animates nicely so
-that the user can easily move large items:
+This component lets animate the height of an element to reveal or hide its
+contents. The animation automatically aligns with the natural height of the
+contents.
 
 [TODO put a gif here]
 
-The above example can be tried here:
+An example can be tried here:
 
 https://streakyc.github.io/react-smooth-collapse/example/
 
