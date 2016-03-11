@@ -106,7 +106,7 @@ export default class SmoothCollapse extends React.Component {
   render() {
     const {height, fullyClosed, hasExpandedBefore} = this.state;
     const innerEl = hasExpandedBefore ?
-      <div ref="inner">
+      <div ref="inner" style={{overflow: 'hidden'}}>
         { (this.props:any).children }
       </div>
       : null;
