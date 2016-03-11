@@ -35,6 +35,7 @@ describe("SmoothCollapse", function() {
 
     assert.strictEqual(root.state.height, '0px');
     assert.strictEqual(rootEl.style.transition, 'height .25s ease');
+    assert.strictEqual(rootEl.style.display, 'none');
 
     assert.strictEqual(
       TestUtils.scryRenderedDOMComponentsWithClass(root, 'foo').length,
@@ -58,6 +59,7 @@ describe("SmoothCollapse", function() {
     );
 
     assert.strictEqual(rootEl.style.transition, 'height 4s ease-in-out 1s');
+    assert.strictEqual(rootEl.style.display, '');
 
     assert.strictEqual(
       TestUtils.scryRenderedDOMComponentsWithClass(root, 'foo').length,
@@ -69,7 +71,7 @@ describe("SmoothCollapse", function() {
     assert(rootEl.removeEventListener.notCalled);
     assert.strictEqual(rootEl.addEventListener.args[0][0], 'transitionend');
 
-    rootEl.addEventListener.args[0][1]();
+    rootEl.addEventListener.args[0][1](); //fake transitionend
 
     assert(onChangeEnd.calledOnce);
     assert(rootEl.addEventListener.calledOnce);
@@ -81,6 +83,7 @@ describe("SmoothCollapse", function() {
     );
 
     assert.strictEqual(root.state.height, 'auto');
+    assert.strictEqual(rootEl.style.display, '');
 
     // CLOSE IT
 
@@ -96,6 +99,7 @@ describe("SmoothCollapse", function() {
     );
 
     assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(rootEl.style.display, '');
 
     // Elements should still be there. If they were removed after being added
     // before, then they could lose any state.
@@ -109,7 +113,9 @@ describe("SmoothCollapse", function() {
     assert(rootEl.removeEventListener.calledOnce);
     assert.strictEqual(rootEl.addEventListener.args[1][0], 'transitionend');
 
-    rootEl.addEventListener.args[1][1]();
+    rootEl.addEventListener.args[1][1](); //fake transitionend
+
+    assert.strictEqual(rootEl.style.display, 'none');
 
     assert(onChangeEnd.calledTwice);
     assert(rootEl.addEventListener.calledTwice);
@@ -144,6 +150,7 @@ describe("SmoothCollapse", function() {
     sinon.spy(rootEl, 'removeEventListener');
 
     assert.strictEqual(root.state.height, 'auto');
+    assert.strictEqual(rootEl.style.display, '');
 
     assert.strictEqual(
       TestUtils.scryRenderedDOMComponentsWithClass(root, 'foo').length,
@@ -166,6 +173,7 @@ describe("SmoothCollapse", function() {
     );
 
     assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(rootEl.style.display, '');
 
     // Elements should still be there. If they were removed after being added
     // before, then they could lose any state.
@@ -179,7 +187,9 @@ describe("SmoothCollapse", function() {
     assert(rootEl.removeEventListener.notCalled);
     assert.strictEqual(rootEl.addEventListener.args[0][0], 'transitionend');
 
-    rootEl.addEventListener.args[0][1]();
+    rootEl.addEventListener.args[0][1](); //fake transitionend
+
+    assert.strictEqual(rootEl.style.display, 'none');
 
     assert(onChangeEnd.calledOnce);
     assert(rootEl.addEventListener.calledOnce);
@@ -214,6 +224,7 @@ describe("SmoothCollapse", function() {
     sinon.spy(rootEl, 'removeEventListener');
 
     assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(rootEl.style.display, 'none');
 
     assert.strictEqual(
       TestUtils.scryRenderedDOMComponentsWithClass(root, 'foo').length,
@@ -234,6 +245,8 @@ describe("SmoothCollapse", function() {
       </SmoothCollapse>,
       div
     );
+
+    assert.strictEqual(rootEl.style.display, '');
 
     assert.strictEqual(
       TestUtils.scryRenderedDOMComponentsWithClass(root, 'foo').length,
@@ -270,6 +283,7 @@ describe("SmoothCollapse", function() {
     );
 
     assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(rootEl.style.display, '');
 
     // Elements should still be there. If they were removed after being added
     // before, then they could lose any state.
@@ -283,7 +297,9 @@ describe("SmoothCollapse", function() {
     assert(rootEl.removeEventListener.calledOnce);
     assert.strictEqual(rootEl.addEventListener.args[1][0], 'transitionend');
 
-    rootEl.addEventListener.args[1][1]();
+    rootEl.addEventListener.args[1][1](); //fake transitionend
+
+    assert.strictEqual(rootEl.style.display, 'none');
 
     assert(onChangeEnd.calledOnce);
     assert(rootEl.addEventListener.calledTwice);

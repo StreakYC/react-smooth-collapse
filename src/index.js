@@ -11,6 +11,7 @@ type Props = {
 };
 type State = {
   hasExpandedBefore: boolean;
+  fullyClosed: boolean;
   height: string;
 };
 type DefaultProps = {
@@ -34,6 +35,7 @@ export default class SmoothCollapse extends React.Component {
     super(props);
     this.state = {
       hasExpandedBefore: props.expanded,
+      fullyClosed: !props.expanded,
       height: props.expanded ? 'auto' : '0px'
     };
   }
@@ -46,11 +48,13 @@ export default class SmoothCollapse extends React.Component {
     if (!this.props.expanded && nextProps.expanded) {
       this._resetter.emit(null);
 
-      // If this element starts out collapsed, then its children are rendered.
       // In order to expand, we need to know the height of the children, so we
       // need to setState first so they get rendered before we continue.
 
-      const afterContentExists = () => {
+      this.setState({
+        fullyClosed: false,
+        hasExpandedBefore: true
+      }, () => {
         // Set the collapser to the target height instead of auto so that it
         // animates correctly. Then switch it to 'auto' after the animation so
         // that it flows correctly if the page is resized.
@@ -71,15 +75,8 @@ export default class SmoothCollapse extends React.Component {
               }
             });
           });
-      };
+      });
 
-      if (!this.state.hasExpandedBefore) {
-        this.setState({
-          hasExpandedBefore: true
-        }, afterContentExists);
-      } else {
-        afterContentExists();
-      }
     } else if (this.props.expanded && !nextProps.expanded) {
       this._resetter.emit(null);
 
@@ -95,6 +92,9 @@ export default class SmoothCollapse extends React.Component {
           .takeUntilBy(this._resetter)
           .take(1)
           .onValue(() => {
+            this.setState({
+              fullyClosed: true
+            });
             if (this.props.onChangeEnd) {
               this.props.onChangeEnd();
             }
@@ -104,7 +104,7 @@ export default class SmoothCollapse extends React.Component {
   }
 
   render() {
-    const {height, hasExpandedBefore} = this.state;
+    const {height, fullyClosed, hasExpandedBefore} = this.state;
     const innerEl = hasExpandedBefore ?
       <div ref="inner">
         { (this.props:any).children }
@@ -116,6 +116,7 @@ export default class SmoothCollapse extends React.Component {
         ref="main"
         style={{
           height, overflow: 'hidden',
+          display: fullyClosed ? 'none': null,
           transition: `height ${this.props.heightTransition}`
         }}
         >
