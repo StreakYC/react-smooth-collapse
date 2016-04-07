@@ -1,7 +1,7 @@
 /* @flow */
+/* eslint-disable no-console, react/prop-types */
 
 import React from 'react';
-import cx from 'classnames';
 import SmoothCollapse from '../src';
 
 export default class Example extends React.Component {
@@ -25,7 +25,7 @@ export default class Example extends React.Component {
           <div>
             <input
               type="button"
-              value={expanded ? "Hide" : "Show"}
+              value={expanded ? 'Hide' : 'Show'}
               onClick={() => this._toggle()}
               />
           </div>

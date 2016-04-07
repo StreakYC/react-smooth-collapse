@@ -6,12 +6,11 @@ import sinon from 'sinon';
 import React from 'react';
 import ReactDOM, {findDOMNode} from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import delay from './lib/delay';
 import SmoothCollapse from '../src';
 
-describe("SmoothCollapse", function() {
+describe('SmoothCollapse', function() {
 
-  it("works after starting closed", async function() {
+  it('works after starting closed', async function() {
     this.slow();
 
     const onChangeEnd = sinon.spy();
@@ -127,7 +126,7 @@ describe("SmoothCollapse", function() {
     );
   });
 
-  it("works after starting opened", function() {
+  it('works after starting opened', function() {
     this.slow();
 
     const onChangeEnd = sinon.spy();
@@ -201,7 +200,7 @@ describe("SmoothCollapse", function() {
     );
   });
 
-  it("works with collapse before expand finishes", function() {
+  it('works with collapse before expand finishes', function() {
     this.slow();
 
     const onChangeEnd = sinon.spy();
