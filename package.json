@@ -1,6 +1,6 @@
 {
   "name": "react-smooth-collapse",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React component for animating showing or hiding an element.",
   "main": "js/index.js",
   "scripts": {
