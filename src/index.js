@@ -25,7 +25,9 @@ export default class SmoothCollapse extends React.Component {
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
-    heightTransition: PropTypes.string
+    heightTransition: PropTypes.string,
+    className: PropTypes.string,
+    innerClassName: PropTypes.string,
   };
   static defaultProps: DefaultProps = {
     heightTransition: '.25s ease'
@@ -106,7 +108,7 @@ export default class SmoothCollapse extends React.Component {
   render() {
     const {height, fullyClosed, hasExpandedBefore} = this.state;
     const innerEl = hasExpandedBefore ?
-      <div ref="inner" style={{overflow: 'hidden'}}>
+      <div ref="inner" style={{overflow: 'hidden'}} className={this.props.innerClassName}>
         { (this.props:any).children }
       </div>
       : null;
@@ -119,6 +121,7 @@ export default class SmoothCollapse extends React.Component {
           display: fullyClosed ? 'none': null,
           transition: `height ${this.props.heightTransition}`
         }}
+        className={this.props.className}
         >
         {innerEl}
       </div>
