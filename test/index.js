@@ -10,7 +10,7 @@ import SmoothCollapse from '../src';
 
 describe('SmoothCollapse', function() {
 
-  it('works after starting closed', async function() {
+  it('works after starting closed', function() {
     this.slow();
 
     const onChangeEnd = sinon.spy();
