@@ -7,14 +7,16 @@ import kefirBus from 'kefir-bus';
 type Props = {
   expanded: boolean;
   onChangeEnd?: ?() => void;
+  collapsedHeight: string;
   heightTransition: string;
 };
 type State = {
-  hasExpandedBefore: boolean;
+  hasBeenVisibleBefore: boolean;
   fullyClosed: boolean;
   height: string;
 };
 type DefaultProps = {
+  collapsedHeight: string;
   heightTransition: string;
 };
 
@@ -25,19 +27,26 @@ export default class SmoothCollapse extends React.Component {
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
+    collapsedHeight: PropTypes.string,
     heightTransition: PropTypes.string
   };
   static defaultProps: DefaultProps = {
+    collapsedHeight: '0',
     heightTransition: '.25s ease'
   };
 
   constructor(props: Props) {
     super(props);
     this.state = {
-      hasExpandedBefore: props.expanded,
+      hasBeenVisibleBefore: props.expanded || this._visibleWhenClosed(),
       fullyClosed: !props.expanded,
-      height: props.expanded ? 'auto' : '0px'
+      height: props.expanded ? 'auto' : props.collapsedHeight
     };
+  }
+
+  _visibleWhenClosed(props: ?Props) {
+    if (!props) props = this.props;
+    return parseFloat(props.collapsedHeight) !== 0;
   }
 
   componentWillUnmount() {
@@ -53,7 +62,7 @@ export default class SmoothCollapse extends React.Component {
 
       this.setState({
         fullyClosed: false,
-        hasExpandedBefore: true
+        hasBeenVisibleBefore: true
       }, () => {
         // Set the collapser to the target height instead of auto so that it
         // animates correctly. Then switch it to 'auto' after the animation so
@@ -85,7 +94,7 @@ export default class SmoothCollapse extends React.Component {
       }, () => {
         this.refs.main.clientHeight; // force the page layout
         this.setState({
-          height: '0px'
+          height: nextProps.collapsedHeight
         });
 
         Kefir.fromEvents(this.refs.main, 'transitionend')
@@ -100,12 +109,19 @@ export default class SmoothCollapse extends React.Component {
             }
           });
       });
+    } else if (!nextProps.expanded && this.props.collapsedHeight !== nextProps.collapsedHeight) {
+      this.setState({
+        hasBeenVisibleBefore:
+          this.state.hasBeenVisibleBefore || this._visibleWhenClosed(nextProps),
+        height: nextProps.collapsedHeight
+      });
     }
   }
 
   render() {
-    const {height, fullyClosed, hasExpandedBefore} = this.state;
-    const innerEl = hasExpandedBefore ?
+    const visibleWhenClosed = this._visibleWhenClosed();
+    const {height, fullyClosed, hasBeenVisibleBefore} = this.state;
+    const innerEl = hasBeenVisibleBefore ?
       <div ref="inner" style={{overflow: 'hidden'}}>
         { (this.props:any).children }
       </div>
@@ -116,7 +132,7 @@ export default class SmoothCollapse extends React.Component {
         ref="main"
         style={{
           height, overflow: 'hidden',
-          display: fullyClosed ? 'none': null,
+          display: (fullyClosed && !visibleWhenClosed) ? 'none': null,
           transition: `height ${this.props.heightTransition}`
         }}
         >

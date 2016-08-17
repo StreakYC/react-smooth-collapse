@@ -32,7 +32,7 @@ describe('SmoothCollapse', function() {
     sinon.spy(rootEl, 'addEventListener');
     sinon.spy(rootEl, 'removeEventListener');
 
-    assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(root.state.height, '0');
     assert.strictEqual(rootEl.style.transition, 'height .25s ease');
     assert.strictEqual(rootEl.style.display, 'none');
 
@@ -97,7 +97,7 @@ describe('SmoothCollapse', function() {
       div
     );
 
-    assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(root.state.height, '0');
     assert.strictEqual(rootEl.style.display, '');
 
     // Elements should still be there. If they were removed after being added
@@ -171,7 +171,7 @@ describe('SmoothCollapse', function() {
       div
     );
 
-    assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(root.state.height, '0');
     assert.strictEqual(rootEl.style.display, '');
 
     // Elements should still be there. If they were removed after being added
@@ -222,7 +222,7 @@ describe('SmoothCollapse', function() {
     sinon.spy(rootEl, 'addEventListener');
     sinon.spy(rootEl, 'removeEventListener');
 
-    assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(root.state.height, '0');
     assert.strictEqual(rootEl.style.display, 'none');
 
     assert.strictEqual(
@@ -281,7 +281,7 @@ describe('SmoothCollapse', function() {
       rootEl.addEventListener.args[0][1]
     );
 
-    assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(root.state.height, '0');
     assert.strictEqual(rootEl.style.display, '');
 
     // Elements should still be there. If they were removed after being added
@@ -310,6 +310,41 @@ describe('SmoothCollapse', function() {
     );
 
     // We're still closed, right?
-    assert.strictEqual(root.state.height, '0px');
+    assert.strictEqual(root.state.height, '0');
+  });
+
+  it('works after starting closed with non-zero collapsedHeight', function() {
+    this.slow();
+
+    const onChangeEnd = sinon.spy();
+
+    const div = document.createElement('div');
+
+    const root: SmoothCollapse = (ReactDOM.render(
+      <SmoothCollapse
+        expanded={false}
+        collapsedHeight="5px"
+        onChangeEnd={onChangeEnd}
+        >
+        <div className="foo">bar</div>
+        <div className="foo">more bar</div>
+      </SmoothCollapse>,
+      div
+    ): any);
+
+    const rootEl: Object = findDOMNode(root);
+    sinon.spy(rootEl, 'addEventListener');
+    sinon.spy(rootEl, 'removeEventListener');
+
+    assert.strictEqual(root.state.height, '5px');
+    assert.strictEqual(rootEl.style.transition, 'height .25s ease');
+    assert.strictEqual(rootEl.style.display, '');
+
+    assert.strictEqual(
+      TestUtils.scryRenderedDOMComponentsWithClass(root, 'foo').length,
+      2
+    );
+
+    assert(onChangeEnd.notCalled);
   });
 });
