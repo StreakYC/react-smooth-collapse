@@ -21,7 +21,7 @@ type DefaultProps = {
 };
 
 export default class SmoothCollapse extends React.Component {
-  _resetter: Object = kefirBus();
+  _resetter = kefirBus();
   props: Props;
   state: State;
   static propTypes = {
