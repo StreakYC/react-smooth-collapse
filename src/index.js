@@ -4,6 +4,8 @@ import React, {PropTypes} from 'react';
 import Kefir from 'kefir';
 import kefirBus from 'kefir-bus';
 
+import getTransitionTimeMs from './getTransitionTimeMs';
+
 export type Props = {
   expanded: boolean;
   onChangeEnd?: ?() => void;
@@ -72,7 +74,14 @@ export default class SmoothCollapse extends React.Component {
           height: targetHeight
         });
 
+        // Wait until the transitionend event, or until a timer goes off in
+        // case the event doesn't fire because the browser doesn't support it
+        // or the element is hidden before it happens. The timer is a little
+        // longer than the transition is supposed to take to make sure we don't
+        // cut the animation early while it's still going if the browser is
+        // running it just a little slow.
         Kefir.fromEvents(this.refs.main, 'transitionend')
+          .merge(Kefir.later(getTransitionTimeMs(nextProps.heightTransition)*1.1 + 500))
           .takeUntilBy(this._resetter)
           .take(1)
           .onValue(() => {
@@ -97,7 +106,9 @@ export default class SmoothCollapse extends React.Component {
           height: nextProps.collapsedHeight
         });
 
+        // See comment above about previous use of transitionend event.
         Kefir.fromEvents(this.refs.main, 'transitionend')
+          .merge(Kefir.later(getTransitionTimeMs(nextProps.heightTransition)*1.1 + 500))
           .takeUntilBy(this._resetter)
           .take(1)
           .onValue(() => {
