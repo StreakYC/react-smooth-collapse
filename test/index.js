@@ -28,7 +28,7 @@ describe('SmoothCollapse', function() {
       div
     ): any);
 
-    const rootEl: Object = findDOMNode(root);
+    const rootEl: any = findDOMNode(root);
     sinon.spy(rootEl, 'addEventListener');
     sinon.spy(rootEl, 'removeEventListener');
 
@@ -144,7 +144,7 @@ describe('SmoothCollapse', function() {
       div
     ): any);
 
-    const rootEl: Object = findDOMNode(root);
+    const rootEl: any = findDOMNode(root);
     sinon.spy(rootEl, 'addEventListener');
     sinon.spy(rootEl, 'removeEventListener');
 
@@ -218,7 +218,7 @@ describe('SmoothCollapse', function() {
       div
     ): any);
 
-    const rootEl: Object = findDOMNode(root);
+    const rootEl: any = findDOMNode(root);
     sinon.spy(rootEl, 'addEventListener');
     sinon.spy(rootEl, 'removeEventListener');
 
@@ -332,7 +332,7 @@ describe('SmoothCollapse', function() {
       div
     ): any);
 
-    const rootEl: Object = findDOMNode(root);
+    const rootEl: any = findDOMNode(root);
     sinon.spy(rootEl, 'addEventListener');
     sinon.spy(rootEl, 'removeEventListener');
 
