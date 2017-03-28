@@ -44,6 +44,7 @@
     "browserify": "^14.1.0",
     "browserify-hmr": "^0.3.5",
     "eslint": "^3.18.0",
+    "eslint-plugin-flowtype": "^2.30.4",
     "eslint-plugin-react": "^6.0.0",
     "flow-bin": "^0.42.0",
     "flow-copy-source": "^1.0.1",

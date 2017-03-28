@@ -4,7 +4,7 @@ import React, {PropTypes} from 'react';
 import Kefir from 'kefir';
 import kefirBus from 'kefir-bus';
 
-type Props = {
+export type Props = {
   expanded: boolean;
   onChangeEnd?: ?() => void;
   collapsedHeight: string;

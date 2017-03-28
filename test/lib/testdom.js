@@ -1,3 +1,5 @@
+/* @flow */
+
 function init() {
   if (typeof document !== 'undefined') return;
   const jsdom = require('jsdom').jsdom;
