@@ -59,7 +59,8 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "kefir": "^3.5.1",
-    "kefir-bus": "^2.2.0"
+    "kefir-bus": "^2.2.0",
+    "prop-types": "^15.5.8"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0"
