@@ -5,7 +5,7 @@ import assert from 'assert';
 import sinon from 'sinon';
 import React from 'react';
 import ReactDOM, {findDOMNode} from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import SmoothCollapse from '../src';
 
 describe('SmoothCollapse', function() {
