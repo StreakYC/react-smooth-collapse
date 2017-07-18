@@ -12,6 +12,7 @@ export type Props = {
   onChangeEnd?: ?() => void;
   collapsedHeight: string;
   heightTransition: string;
+  className: string;
 };
 type State = {
   hasBeenVisibleBefore: boolean;
@@ -21,6 +22,7 @@ type State = {
 type DefaultProps = {
   collapsedHeight: string;
   heightTransition: string;
+  className: string;
 };
 
 export default class SmoothCollapse extends React.Component {
@@ -31,11 +33,13 @@ export default class SmoothCollapse extends React.Component {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
     collapsedHeight: PropTypes.string,
-    heightTransition: PropTypes.string
+    heightTransition: PropTypes.string,
+    className: PropTypes.string
   };
   static defaultProps: DefaultProps = {
     collapsedHeight: '0',
-    heightTransition: '.25s ease'
+    heightTransition: '.25s ease',
+    className: '',
   };
 
   constructor(props: Props) {
@@ -142,6 +146,7 @@ export default class SmoothCollapse extends React.Component {
     return (
       <div
         ref="main"
+        className={this.props.className}
         style={{
           height, overflow: 'hidden',
           display: (fullyClosed && !visibleWhenClosed) ? 'none': null,
