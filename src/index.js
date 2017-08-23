@@ -21,6 +21,8 @@ type State = {
 
 export default class SmoothCollapse extends React.Component<Props,State> {
   _resetter = kefirBus();
+  _mainEl: ?HTMLElement;
+  _innerEl: ?HTMLElement;
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
@@ -61,10 +63,14 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         fullyClosed: false,
         hasBeenVisibleBefore: true
       }, () => {
+        const mainEl = this._mainEl;
+        const innerEl = this._innerEl;
+        if (!mainEl || !innerEl) throw new Error('Should not happen');
+
         // Set the collapser to the target height instead of auto so that it
         // animates correctly. Then switch it to 'auto' after the animation so
         // that it flows correctly if the page is resized.
-        const targetHeight = `${this.refs.inner.clientHeight}px`;
+        const targetHeight = `${innerEl.clientHeight}px`;
         this.setState({
           height: targetHeight
         });
@@ -75,7 +81,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         // longer than the transition is supposed to take to make sure we don't
         // cut the animation early while it's still going if the browser is
         // running it just a little slow.
-        Kefir.fromEvents(this.refs.main, 'transitionend')
+        Kefir.fromEvents(mainEl, 'transitionend')
           .merge(Kefir.later(getTransitionTimeMs(nextProps.heightTransition)*1.1 + 500))
           .takeUntilBy(this._resetter)
           .take(1)
@@ -93,16 +99,20 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     } else if (this.props.expanded && !nextProps.expanded) {
       this._resetter.emit(null);
 
+      if (!this._innerEl) throw new Error('Should not happen');
       this.setState({
-        height: `${this.refs.inner.clientHeight}px`
+        height: `${this._innerEl.clientHeight}px`
       }, () => {
-        this.refs.main.clientHeight; // force the page layout
+        const mainEl = this._mainEl;
+        if (!mainEl) throw new Error('Should not happen');
+
+        mainEl.clientHeight; // force the page layout
         this.setState({
           height: nextProps.collapsedHeight
         });
 
         // See comment above about previous use of transitionend event.
-        Kefir.fromEvents(this.refs.main, 'transitionend')
+        Kefir.fromEvents(mainEl, 'transitionend')
           .merge(Kefir.later(getTransitionTimeMs(nextProps.heightTransition)*1.1 + 500))
           .takeUntilBy(this._resetter)
           .take(1)
@@ -128,20 +138,20 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     const visibleWhenClosed = this._visibleWhenClosed();
     const {height, fullyClosed, hasBeenVisibleBefore} = this.state;
     const innerEl = hasBeenVisibleBefore ?
-      <div ref="inner" style={{overflow: 'hidden'}}>
+      <div ref={innerEl => this._innerEl = innerEl} style={{overflow: 'hidden'}}>
         { (this.props:any).children }
       </div>
       : null;
 
     return (
       <div
-        ref="main"
+        ref={mainEl => this._mainEl = mainEl}
         style={{
           height, overflow: 'hidden',
           display: (fullyClosed && !visibleWhenClosed) ? 'none': null,
           transition: `height ${this.props.heightTransition}`
         }}
-        >
+      >
         {innerEl}
       </div>
     );

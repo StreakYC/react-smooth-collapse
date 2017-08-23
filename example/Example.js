@@ -27,7 +27,7 @@ export default class Example extends React.Component<{},*> {
               type="button"
               value={expanded ? 'Hide' : 'Show'}
               onClick={() => this._toggle()}
-              />
+            />
           </div>
           <SmoothCollapse expanded={expanded}>
             <div className="contents">

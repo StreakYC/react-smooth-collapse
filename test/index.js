@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react/no-find-dom-node */
 
 import './lib/testdom';
 import assert from 'assert';
@@ -21,7 +22,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={false}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -50,7 +51,7 @@ describe('SmoothCollapse', function() {
         expanded={true}
         onChangeEnd={onChangeEnd}
         heightTransition="4s ease-in-out 1s"
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -90,7 +91,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={false}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -137,7 +138,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={true}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -164,7 +165,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={false}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -211,7 +212,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={false}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -238,7 +239,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={true}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -265,7 +266,7 @@ describe('SmoothCollapse', function() {
       <SmoothCollapse
         expanded={false}
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
@@ -325,7 +326,7 @@ describe('SmoothCollapse', function() {
         expanded={false}
         collapsedHeight="5px"
         onChangeEnd={onChangeEnd}
-        >
+      >
         <div className="foo">bar</div>
         <div className="foo">more bar</div>
       </SmoothCollapse>,
