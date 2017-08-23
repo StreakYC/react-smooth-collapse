@@ -18,22 +18,16 @@ type State = {
   fullyClosed: boolean;
   height: string;
 };
-type DefaultProps = {
-  collapsedHeight: string;
-  heightTransition: string;
-};
 
-export default class SmoothCollapse extends React.Component {
+export default class SmoothCollapse extends React.Component<Props,State> {
   _resetter = kefirBus();
-  props: Props;
-  state: State;
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
     collapsedHeight: PropTypes.string,
     heightTransition: PropTypes.string
   };
-  static defaultProps: DefaultProps = {
+  static defaultProps = {
     collapsedHeight: '0',
     heightTransition: '.25s ease'
   };

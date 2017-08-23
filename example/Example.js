@@ -4,7 +4,7 @@
 import React from 'react';
 import SmoothCollapse from '../src';
 
-export default class Example extends React.Component {
+export default class Example extends React.Component<{},*> {
   state: Object = {
     expanded: false
   };
