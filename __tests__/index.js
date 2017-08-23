@@ -1,7 +1,6 @@
 /* @flow */
 /* eslint-disable react/no-find-dom-node */
 
-import './lib/testdom';
 import assert from 'assert';
 import sinon from 'sinon';
 import React from 'react';
@@ -12,8 +11,6 @@ import SmoothCollapse from '../src';
 describe('SmoothCollapse', function() {
 
   it('works after starting closed', function() {
-    this.slow();
-
     const onChangeEnd = sinon.spy();
 
     const div = document.createElement('div');
@@ -128,8 +125,6 @@ describe('SmoothCollapse', function() {
   });
 
   it('works after starting opened', function() {
-    this.slow();
-
     const onChangeEnd = sinon.spy();
 
     const div = document.createElement('div');
@@ -202,8 +197,6 @@ describe('SmoothCollapse', function() {
   });
 
   it('works with collapse before expand finishes', function() {
-    this.slow();
-
     const onChangeEnd = sinon.spy();
 
     const div = document.createElement('div');
@@ -315,8 +308,6 @@ describe('SmoothCollapse', function() {
   });
 
   it('works after starting closed with non-zero collapsedHeight', function() {
-    this.slow();
-
     const onChangeEnd = sinon.spy();
 
     const div = document.createElement('div');

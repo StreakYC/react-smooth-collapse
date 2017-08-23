@@ -3,7 +3,7 @@
 /node_modules
 npm-debug.log
 /src
-/test
+/__tests__
 /example
-/flow-libs
+/flow-typed
 yarn.lock
