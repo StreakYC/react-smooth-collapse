@@ -21,8 +21,14 @@ type State = {
 
 export default class SmoothCollapse extends React.Component<Props,State> {
   _resetter = kefirBus();
-  _mainEl: ?HTMLElement;
-  _innerEl: ?HTMLElement;
+  _mainEl: ?HTMLElement = null;
+  _innerEl: ?HTMLElement = null;
+  _mainElSetter = (el: ?HTMLElement) => {
+    this._mainEl = el;
+  };
+  _innerElSetter = (el: ?HTMLElement) => {
+    this._innerEl = el;
+  };
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
@@ -138,14 +144,14 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     const visibleWhenClosed = this._visibleWhenClosed();
     const {height, fullyClosed, hasBeenVisibleBefore} = this.state;
     const innerEl = hasBeenVisibleBefore ?
-      <div ref={innerEl => this._innerEl = innerEl} style={{overflow: 'hidden'}}>
+      <div ref={this._innerElSetter} style={{overflow: 'hidden'}}>
         { (this.props:any).children }
       </div>
       : null;
 
     return (
       <div
-        ref={mainEl => this._mainEl = mainEl}
+        ref={this._mainElSetter}
         style={{
           height, overflow: 'hidden',
           display: (fullyClosed && !visibleWhenClosed) ? 'none': null,
