@@ -6,4 +6,4 @@ npm-debug.log
 /__tests__
 /example
 /flow-typed
-yarn.lock
+/yarn.lock
