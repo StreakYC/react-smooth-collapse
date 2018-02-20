@@ -63,6 +63,9 @@ takes the following props:
 * `heightTransition` may be a string and is used for customizing the animation.
  This value is prefixed with "height " and is set as the CSS transition
  property of the SmoothCollapse element. This property defaults to ".25s ease".
+* `className` allows a CSS class name to be added to the outer element. Care
+ should be taken if any rules added by the class name conflict with
+ SmoothCollapse's own CSS properties.
 
 If the SmoothCollapse component starts out with expanded set to false and
 collapsedHeight is 0, then the children are not rendered until the first time
