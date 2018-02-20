@@ -63,6 +63,11 @@ takes the following props:
 * `heightTransition` may be a string and is used for customizing the animation.
  This value is prefixed with "height " and is set as the CSS transition
  property of the SmoothCollapse element. This property defaults to ".25s ease".
+* `allowOverflowWhenOpen` is an optional boolean that when true causes the
+ overflow:hidden  CSS rule to be removed while the element is open. This
+ behavior is off by  default because the CSS rule must be present while
+ animating, and contents that rely on the rule not being present while open may
+ be jarringly effected when the rule is added.
 * `className` allows a CSS class name to be added to the outer element. Care
  should be taken if any rules added by the class name conflict with
  SmoothCollapse's own CSS properties.
