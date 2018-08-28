@@ -67,7 +67,9 @@ takes the following props:
  overflow:hidden  CSS rule to be removed while the element is open. This
  behavior is off by  default because the CSS rule must be present while
  animating, and contents that rely on the rule not being present while open may
- be jarringly effected when the rule is added.
+ be jarringly effected when the rule is added. You may want this prop turned on
+ if the children contains a dropdown element which is meant to visually escape
+ its container.
 * `className` allows a CSS class name to be added to the outer element. Care
  should be taken if any rules added by the class name conflict with
  SmoothCollapse's own CSS properties.
