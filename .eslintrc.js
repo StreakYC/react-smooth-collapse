@@ -19,7 +19,7 @@ module.exports = {
   ],
   "settings": {
     "react": {
-      "version": "16.0",
+      "version": "16.5",
       "flowVersion": "0.81"
     }
   },
@@ -38,6 +38,8 @@ module.exports = {
     "no-spaced-func": ["error"],
     "no-whitespace-before-property": ["error"],
     "space-before-blocks": ["error", "always"],
-    "keyword-spacing": ["error"]
+    "keyword-spacing": ["error"],
+
+    "no-unused-vars": ["error", {"args": "none"}]
   }
 };

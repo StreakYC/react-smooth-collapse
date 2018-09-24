@@ -19,13 +19,7 @@ by running:
 ```
 yarn
 yarn example-build
-```
-
-You can build the example with live editing enabled (using
-[react-transform-hmr](https://github.com/gaearon/react-transform-hmr) and
-[browserify-hmr](https://github.com/AgentME/browserify-hmr)) by running:
-
-```
+# or use this to auto-rebuild on changes:
 yarn example-watch
 ```
 
@@ -84,5 +78,6 @@ hidden.
 
 ## Types
 
-[Flow](https://flowtype.org/) type declarations for this module are included!
-If you are using Flow, they won't require any configuration to use.
+Both [TypeScript](https://www.typescriptlang.org/) and
+[Flow](https://flowtype.org/) type definitions for this module are included!
+The type definitions won't require any configuration to use.
