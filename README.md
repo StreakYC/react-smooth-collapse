@@ -73,11 +73,14 @@ takes the following props:
 * `className` allows a CSS class name to be added to the outer element. Care
  should be taken if any rules added by the class name conflict with
  SmoothCollapse's own CSS properties.
+ * `eagerRender` will ensure that all children are always rendered, even if they
+ have never been expanded. This property defaults to false.
 
-If the SmoothCollapse component starts out with expanded set to false and
-collapsedHeight is 0, then the children are not rendered until the first time
-the component is expanded. After the component has been expanded once, the
-children stay rendered so that they don't lose their state when they're hidden.
+If the SmoothCollapse component starts out with expanded set to false, eagerRender
+is set to false, and collapsedHeight is 0 , then the children are not rendered until
+the first time the component is expanded. After the component has been expanded
+once, the children stay rendered so that they don't lose their state when they're
+hidden.
 
 ## Types
 
