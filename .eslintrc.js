@@ -17,6 +17,12 @@ module.exports = {
   "plugins": [
     "react", "flowtype"
   ],
+  "settings": {
+    "react": {
+      "version": "16.0",
+      "flowVersion": "0.81"
+    }
+  },
   "rules": {
     "flowtype/define-flow-type": 1,
     "flowtype/require-valid-file-annotation": ["error", "always"],
