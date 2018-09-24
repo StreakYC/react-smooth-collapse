@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import Kefir from 'kefir';
 import kefirBus from 'kefir-bus';
@@ -8,6 +8,7 @@ import kefirBus from 'kefir-bus';
 import getTransitionTimeMs from './getTransitionTimeMs';
 
 export type Props = {
+  children?: React.Node;
   expanded: boolean;
   onChangeEnd?: ?() => void;
   collapsedHeight: string;
@@ -154,7 +155,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
       <div ref={this._inner} style={{
         overflow: allowOverflowWhenOpen && height === 'auto' ? 'visible' : 'hidden'
       }}>
-        { (this.props:any).children }
+        { this.props.children }
       </div>
       : null;
 
