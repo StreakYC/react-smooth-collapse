@@ -14,6 +14,7 @@ export type Props = {
   heightTransition: string;
   className: string;
   allowOverflowWhenOpen: boolean;
+  eagerRender: boolean;
 };
 type State = {
   hasBeenVisibleBefore: boolean;
@@ -37,13 +38,15 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     collapsedHeight: PropTypes.string,
     heightTransition: PropTypes.string,
     className: PropTypes.string,
-    allowOverflowWhenOpen: PropTypes.bool
+    allowOverflowWhenOpen: PropTypes.bool,
+    eagerRender: PropTypes.bool
   };
   static defaultProps = {
     collapsedHeight: '0',
     heightTransition: '.25s ease',
     className: '',
     allowOverflowWhenOpen: false,
+    eagerRender: false
   };
 
   constructor(props: Props) {
@@ -57,7 +60,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
 
   _visibleWhenClosed(props: ?Props) {
     if (!props) props = this.props;
-    return parseFloat(props.collapsedHeight) !== 0;
+    return props.eagerRender || parseFloat(props.collapsedHeight) !== 0;
   }
 
   componentWillUnmount() {
