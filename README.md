@@ -77,7 +77,7 @@ takes the following props:
  have never been expanded. This property defaults to false.
 
 If the SmoothCollapse component starts out with expanded set to false, eagerRender
-is set to false, and collapsedHeight is 0 , then the children are not rendered until
+is set to false, and collapsedHeight is 0, then the children are not rendered until
 the first time the component is expanded. After the component has been expanded
 once, the children stay rendered so that they don't lose their state when they're
 hidden.
