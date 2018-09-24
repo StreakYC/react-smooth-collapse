@@ -38,6 +38,8 @@ module.exports = {
     "no-spaced-func": ["error"],
     "no-whitespace-before-property": ["error"],
     "space-before-blocks": ["error", "always"],
-    "keyword-spacing": ["error"]
+    "keyword-spacing": ["error"],
+
+    "no-unused-vars": ["error", {"args": "none"}]
   }
 };
