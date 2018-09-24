@@ -1,3 +1,11 @@
+## 2.0.0 (TODO)
+
+### Breaking Changes
+* Now requires React ^16.3.0.
+
+### Improvements
+* No longer uses deprecated React methods.
+
 ## 1.6.0 (2018-09-24)
 
 * Added eagerRender prop [#19](https://github.com/StreakYC/react-smooth-collapse/pull/19)
