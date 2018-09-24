@@ -1,4 +1,4 @@
-## 2.0.0 (TODO)
+## 2.0.0 (2018-09-24)
 
 ### Breaking Changes
 * Now requires React ^16.3.0.
