@@ -64,8 +64,9 @@ export default class SmoothCollapse extends React.Component<Props,State> {
   }
 
   static getDerivedStateFromProps(props: Props, state: State) {
-    if (props.expanded && state.fullyClosed) {
+    if (props.expanded && (state.closing || state.fullyClosed)) {
       return {
+        closing: false,
         fullyClosed: false,
         renderInner: true
       };
