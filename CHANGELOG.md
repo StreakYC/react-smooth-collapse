@@ -2,6 +2,7 @@
 
 ### Breaking Changes
 * Now requires React ^16.3.0.
+* The module now exports the SmoothCollapse component as the default export. If you use SmoothCollapse by using `import SmoothCollapse from 'react-smooth-collapse';` with Babel or TypeScript, then you don't need to change anything, but if you use `require('react-smooth-collapse')`, then you'll need to change your code to use import or to use `require('react-smooth-collapse').default`.
 
 ### Improvements
 * No longer uses deprecated React methods.
