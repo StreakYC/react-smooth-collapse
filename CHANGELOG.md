@@ -6,6 +6,7 @@
 
 ### Improvements
 * No longer uses deprecated React methods.
+* Added TypeScript type definitions.
 
 ## 1.6.0 (2018-09-24)
 

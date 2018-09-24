@@ -9,7 +9,7 @@
     "example-build": "cross-env NODE_ENV=development browserify -t babelify -do example/bundle.js example/main.js",
     "example-watch": "cross-env NODE_ENV=development watchify -v -t babelify -do example/bundle.js example/main.js",
     "example-build-prod": "cross-env NODE_ENV=production browserify -t babelify -do example/bundle.js example/main.js",
-    "test": "npm run lint && npm run flow_check && jest",
+    "test": "npm run lint && npm run flow_check && jest && tsc",
     "flow_check": "flow check",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix"
@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@types/react": "^16.4.14",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
@@ -55,6 +56,7 @@
     "react-dom": "^16.3.0",
     "rimraf": "^2.6.1",
     "sinon": "^6.3.4",
+    "typescript": "^3.0.3",
     "watchify": "^3.9.0"
   },
   "dependencies": {
