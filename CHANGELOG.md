@@ -17,7 +17,7 @@
 
 ## 1.3.0 (2017-08-23)
 
-* Add support for [Flow](https://flow.org/) 0.53.
+* Added support for [Flow](https://flow.org/) 0.53.
 
 ## 1.2.0 (2017-04-25)
 
