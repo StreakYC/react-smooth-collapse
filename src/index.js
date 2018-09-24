@@ -24,14 +24,8 @@ type State = {
 
 export default class SmoothCollapse extends React.Component<Props,State> {
   _resetter = kefirBus();
-  _mainEl: ?HTMLElement = null;
-  _innerEl: ?HTMLElement = null;
-  _mainElSetter = (el: ?HTMLElement) => {
-    this._mainEl = el;
-  };
-  _innerElSetter = (el: ?HTMLElement) => {
-    this._innerEl = el;
-  };
+  _main = React.createRef<'div'>();
+  _inner = React.createRef<'div'>();
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
@@ -78,8 +72,8 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         fullyClosed: false,
         hasBeenVisibleBefore: true
       }, () => {
-        const mainEl = this._mainEl;
-        const innerEl = this._innerEl;
+        const mainEl = this._main.current;
+        const innerEl = this._inner.current;
         if (!mainEl || !innerEl) throw new Error('Should not happen');
 
         // Set the collapser to the target height instead of auto so that it
@@ -114,11 +108,11 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     } else if (this.props.expanded && !nextProps.expanded) {
       this._resetter.emit(null);
 
-      if (!this._innerEl) throw new Error('Should not happen');
+      if (!this._inner.current) throw new Error('Should not happen');
       this.setState({
-        height: `${this._innerEl.clientHeight}px`
+        height: `${this._inner.current.clientHeight}px`
       }, () => {
-        const mainEl = this._mainEl;
+        const mainEl = this._main.current;
         if (!mainEl) throw new Error('Should not happen');
 
         mainEl.clientHeight; // force the page layout
@@ -154,7 +148,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     const {allowOverflowWhenOpen} = this.props;
     const {height, fullyClosed, hasBeenVisibleBefore} = this.state;
     const innerEl = hasBeenVisibleBefore ?
-      <div ref={this._innerElSetter} style={{
+      <div ref={this._inner} style={{
         overflow: allowOverflowWhenOpen && height === 'auto' ? 'visible' : 'hidden'
       }}>
         { (this.props:any).children }
@@ -163,7 +157,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
 
     return (
       <div
-        ref={this._mainElSetter}
+        ref={this._main}
         className={this.props.className}
         style={{
           height,
