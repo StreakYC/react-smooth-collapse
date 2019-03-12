@@ -2,8 +2,6 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Kefir from 'kefir';
-import kefirBus from 'kefir-bus';
 
 import getTransitionTimeMs from './getTransitionTimeMs';
 
@@ -25,7 +23,7 @@ type State = {
 };
 
 export default class SmoothCollapse extends React.Component<Props,State> {
-  _resetter = kefirBus();
+  _removeTransitionEndListener = () => {};
   _main = React.createRef<'div'>();
   _inner = React.createRef<'div'>();
   static propTypes = {
@@ -60,7 +58,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
   }
 
   componentWillUnmount() {
-    this._resetter.emit(null);
+    this._removeTransitionEndListener();
   }
 
   static getDerivedStateFromProps(props: Props, state: State) {
@@ -79,9 +77,35 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     return null;
   }
 
+  _onNextTransitionEnd = (el: HTMLDivElement, callback: () => void) => {
+    this._removeTransitionEndListener();
+
+    const listener = () => {
+      this._removeTransitionEndListener();
+      callback();
+    };
+
+    let timeout;
+    this._removeTransitionEndListener = () => {
+      this._removeTransitionEndListener = () => {};
+      clearTimeout(timeout);
+      el.removeEventListener('transitionend', listener);
+    };
+
+    // Wait until the transitionend event, or until a timer goes off in
+    // case the event doesn't fire because the browser doesn't support it
+    // or the element is hidden before it happens. The timer is a little
+    // longer than the transition is supposed to take to make sure we don't
+    // cut the animation early while it's still going if the browser is
+    // running it just a little slow.
+    el.addEventListener('transitionend', listener);
+    const ms = getTransitionTimeMs(this.props.heightTransition) * 1.1 + 500;
+    timeout = setTimeout(listener, ms);
+  }
+
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (!prevProps.expanded && this.props.expanded) {
-      this._resetter.emit(null);
+      this._removeTransitionEndListener();
 
       const mainEl = this._main.current;
       const innerEl = this._inner.current;
@@ -95,27 +119,17 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         height: targetHeight
       });
 
-      // Wait until the transitionend event, or until a timer goes off in
-      // case the event doesn't fire because the browser doesn't support it
-      // or the element is hidden before it happens. The timer is a little
-      // longer than the transition is supposed to take to make sure we don't
-      // cut the animation early while it's still going if the browser is
-      // running it just a little slow.
-      Kefir.fromEvents(mainEl, 'transitionend')
-        .merge(Kefir.later(getTransitionTimeMs(this.props.heightTransition)*1.1 + 500))
-        .takeUntilBy(this._resetter)
-        .take(1)
-        .onValue(() => {
-          this.setState({
-            height: 'auto'
-          }, () => {
-            if (this.props.onChangeEnd) {
-              this.props.onChangeEnd();
-            }
-          });
+      this._onNextTransitionEnd(mainEl, () => {
+        this.setState({
+          height: 'auto'
+        }, () => {
+          if (this.props.onChangeEnd) {
+            this.props.onChangeEnd();
+          }
         });
+      });
     } else if (prevProps.expanded && !this.props.expanded) {
-      this._resetter.emit(null);
+      this._removeTransitionEndListener();
 
       if (!this._inner.current) throw new Error('Should not happen');
       this.setState({
@@ -130,20 +144,15 @@ export default class SmoothCollapse extends React.Component<Props,State> {
           closing: true
         });
 
-        // See comment above about previous use of transitionend event.
-        Kefir.fromEvents(mainEl, 'transitionend')
-          .merge(Kefir.later(getTransitionTimeMs(this.props.heightTransition)*1.1 + 500))
-          .takeUntilBy(this._resetter)
-          .take(1)
-          .onValue(() => {
-            this.setState({
-              closing: false,
-              fullyClosed: true
-            });
-            if (this.props.onChangeEnd) {
-              this.props.onChangeEnd();
-            }
+        this._onNextTransitionEnd(mainEl, () => {
+          this.setState({
+            closing: false,
+            fullyClosed: true
           });
+          if (this.props.onChangeEnd) {
+            this.props.onChangeEnd();
+          }
+        });
       });
     }
   }

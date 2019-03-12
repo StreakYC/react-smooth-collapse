@@ -3408,11 +3408,7 @@ just-extend@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-3.0.0.tgz#cee004031eaabf6406da03a7b84e4fe9d78ef288"
 
-kefir-bus@^2.2.0:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/kefir-bus/-/kefir-bus-2.2.1.tgz#481f18ba274fc5580175db5cc67ce7a8228ea250"
-
-kefir@^3.5.1, kefir@^3.7.3:
+kefir@^3.7.3:
   version "3.8.5"
   resolved "https://registry.yarnpkg.com/kefir/-/kefir-3.8.5.tgz#ce8d952707ea833d9d995a96b92daa744dea83ba"
   dependencies:
