@@ -5,6 +5,7 @@
 .*/node_modules/builtin-modules/.*
 .*/node_modules/spdx-.*/.*
 .*/node_modules/.*/\(test\|lib\|example\|samplejson\)/.*\.json
+<PROJECT_ROOT>/js/
 
 [include]
 

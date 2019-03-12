@@ -24,8 +24,8 @@ type State = {
 
 export default class SmoothCollapse extends React.Component<Props,State> {
   _removeTransitionEndListener = () => {};
-  _main = React.createRef<'div'>();
-  _inner = React.createRef<'div'>();
+  _main = React.createRef<HTMLDivElement>();
+  _inner = React.createRef<HTMLDivElement>();
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     onChangeEnd: PropTypes.func,
