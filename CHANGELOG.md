@@ -1,3 +1,7 @@
+## 2.0.1 (2019-03-12)
+
+* Removed dependency on Kefir (10KB minified and gzipped).
+
 ## 2.0.0 (2018-09-24)
 
 ### Breaking Changes
