@@ -77,7 +77,14 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     return null;
   }
 
-  _onTransitionEnd = (el: HTMLDivElement, listener: () => void) => {
+  _onNextTransitionEnd = (el: HTMLDivElement, callback: () => void) => {
+    this._removeTransitionEndListener();
+
+    const listener = () => {
+      this._removeTransitionEndListener();
+      callback();
+    };
+
     let timeout;
     this._removeTransitionEndListener = () => {
       this._removeTransitionEndListener = () => {};
@@ -112,8 +119,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         height: targetHeight
       });
 
-      this._onTransitionEnd(mainEl, () => {
-        this._removeTransitionEndListener();
+      this._onNextTransitionEnd(mainEl, () => {
         this.setState({
           height: 'auto'
         }, () => {
@@ -138,8 +144,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
           closing: true
         });
 
-        this._onTransitionEnd(mainEl, () => {
-          this._removeTransitionEndListener();
+        this._onNextTransitionEnd(mainEl, () => {
           this.setState({
             closing: false,
             fullyClosed: true
