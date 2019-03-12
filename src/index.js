@@ -23,7 +23,7 @@ type State = {
 };
 
 export default class SmoothCollapse extends React.Component<Props,State> {
-  _reset = () => {};
+  _removeTransitionEndListener = () => {};
   _main = React.createRef<'div'>();
   _inner = React.createRef<'div'>();
   static propTypes = {
@@ -58,7 +58,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
   }
 
   componentWillUnmount() {
-    this._reset();
+    this._removeTransitionEndListener();
   }
 
   static getDerivedStateFromProps(props: Props, state: State) {
@@ -79,8 +79,8 @@ export default class SmoothCollapse extends React.Component<Props,State> {
 
   _onTransitionEnd = (el: HTMLDivElement, listener: () => void) => {
     let timeout;
-    this._reset = () => {
-      this._reset = () => {};
+    this._removeTransitionEndListener = () => {
+      this._removeTransitionEndListener = () => {};
       clearTimeout(timeout);
       el.removeEventListener('transitionend', listener);
     };
@@ -98,7 +98,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (!prevProps.expanded && this.props.expanded) {
-      this._reset();
+      this._removeTransitionEndListener();
 
       const mainEl = this._main.current;
       const innerEl = this._inner.current;
@@ -113,7 +113,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
       });
 
       this._onTransitionEnd(mainEl, () => {
-        this._reset();
+        this._removeTransitionEndListener();
         this.setState({
           height: 'auto'
         }, () => {
@@ -123,7 +123,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         });
       });
     } else if (prevProps.expanded && !this.props.expanded) {
-      this._reset();
+      this._removeTransitionEndListener();
 
       if (!this._inner.current) throw new Error('Should not happen');
       this.setState({
@@ -139,7 +139,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         });
 
         this._onTransitionEnd(mainEl, () => {
-          this._reset();
+          this._removeTransitionEndListener();
           this.setState({
             closing: false,
             fullyClosed: true
