@@ -64,11 +64,12 @@ takes the following props:
  be jarringly effected when the rule is added. You may want this prop turned on
  if the children contains a dropdown element which is meant to visually escape
  its container.
-* `className` allows a CSS class name to be added to the outer element. Care
- should be taken if any rules added by the class name conflict with
- SmoothCollapse's own CSS properties.
  * `eagerRender` will ensure that all children are always rendered, even if they
  have never been expanded. This property defaults to false.
+
+Additional props such as `className` will be passed on to the outer element. Care
+should be taken if any rules added by the class name conflict with
+SmoothCollapse's own CSS properties.
 
 If the SmoothCollapse component starts out with expanded set to false, eagerRender
 is set to false, and collapsedHeight is 0, then the children are not rendered until
