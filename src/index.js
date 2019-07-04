@@ -159,25 +159,28 @@ export default class SmoothCollapse extends React.Component<Props,State> {
 
   render() {
     const visibleWhenClosed = SmoothCollapse._visibleWhenClosed(this.props);
-    const {allowOverflowWhenOpen} = this.props;
+    const {
+      allowOverflowWhenOpen, children, collapsedHeight, eagerRender, expanded,
+      heightTransition, onChangeEnd, ...props
+    } = this.props;
     const {height, fullyClosed, renderInner} = this.state;
     const innerEl = renderInner ?
       <div ref={this._inner} style={{
         overflow: allowOverflowWhenOpen && height === 'auto' ? 'visible' : 'hidden'
       }}>
-        { this.props.children }
+        { children }
       </div>
       : null;
 
     return (
       <div
+        {...props}
         ref={this._main}
-        className={this.props.className}
         style={{
           height,
           overflow: allowOverflowWhenOpen && height === 'auto' ? 'visible' : 'hidden',
           display: (fullyClosed && !visibleWhenClosed) ? 'none': null,
-          transition: `height ${this.props.heightTransition}`
+          transition: `height ${heightTransition}`
         }}
       >
         {innerEl}
