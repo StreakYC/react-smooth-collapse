@@ -40,6 +40,6 @@ module.exports = {
     "space-before-blocks": ["error", "always"],
     "keyword-spacing": ["error"],
 
-    "no-unused-vars": ["error", {"args": "none"}]
+    "no-unused-vars": ["error", {"args": "none", "ignoreRestSiblings": true}]
   }
 };
