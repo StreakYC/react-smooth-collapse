@@ -1,3 +1,7 @@
+## 2.1.0 (2019-07-30)
+
+* Pass any unrecognized props on to the outer div element [#23](https://github.com/StreakYC/react-smooth-collapse/pull/23)
+
 ## 2.0.1 (2019-03-12)
 
 * Removed dependency on Kefir (10KB minified and gzipped).
