@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface Props extends Omit<React.HTMLAttributes<HTMLDivElement>, 'style'> {
+export interface Props extends React.HTMLAttributes<HTMLDivElement> {
   expanded: boolean;
   onChangeEnd?: (() => void) | null | undefined;
   collapsedHeight?: string;
