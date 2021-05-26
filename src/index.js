@@ -12,6 +12,7 @@ export type Props = {
   collapsedHeight: string;
   heightTransition: string;
   className: string;
+  style?: {};
   allowOverflowWhenOpen: boolean;
   eagerRender: boolean;
 };
@@ -32,6 +33,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     collapsedHeight: PropTypes.string,
     heightTransition: PropTypes.string,
     className: PropTypes.string,
+    style: PropTypes.object,
     allowOverflowWhenOpen: PropTypes.bool,
     eagerRender: PropTypes.bool
   };
@@ -161,7 +163,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     const visibleWhenClosed = SmoothCollapse._visibleWhenClosed(this.props);
     const {
       allowOverflowWhenOpen, children, collapsedHeight, eagerRender, expanded,
-      heightTransition, onChangeEnd, ...props
+      heightTransition, onChangeEnd, style, ...props
     } = this.props;
     const {height, fullyClosed, renderInner} = this.state;
     const innerEl = renderInner ?
@@ -177,6 +179,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
         {...props}
         ref={this._main}
         style={{
+          ...style,
           height,
           overflow: allowOverflowWhenOpen && height === 'auto' ? 'visible' : 'hidden',
           display: (fullyClosed && !visibleWhenClosed) ? 'none': null,
