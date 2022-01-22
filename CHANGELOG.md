@@ -1,3 +1,7 @@
+## 2.1.1 (2022-01-22)
+
+* Added React v17 to peerDependencies.
+
 ## 2.1.0 (2019-07-30)
 
 * Pass any unrecognized props on to the outer div element [#23](https://github.com/StreakYC/react-smooth-collapse/pull/23)

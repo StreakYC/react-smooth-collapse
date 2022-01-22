@@ -1,8 +1,11 @@
 version: 2
 jobs:
   build:
+    branches:
+      ignore:
+        - gh-pages
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:16
     steps:
       - checkout
       - restore_cache:
@@ -13,14 +16,9 @@ jobs:
             - yarn-packages-master
             - yarn-packages-
       - run:
-          name: Prepare Greenkeeper
-          command: |
-            echo 'export PATH=$(yarn global bin):$PATH' >> "$BASH_ENV"
-            source "$BASH_ENV"
-            yarn global add greenkeeper-lockfile@1
-      - run:
           name: Install Dependencies
           command: yarn install
+      - run: yarn test
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -29,6 +27,3 @@ jobs:
             - ~/.yarn/bin/
             - ~/.config/yarn/global/
             - ~/.cache/yarn
-      - run: greenkeeper-lockfile-update
-      - run: yarn test
-      - run: greenkeeper-lockfile-upload

@@ -101,7 +101,7 @@ export default class SmoothCollapse extends React.Component<Props,State> {
     el.addEventListener('transitionend', listener);
     const ms = getTransitionTimeMs(this.props.heightTransition) * 1.1 + 500;
     timeout = setTimeout(listener, ms);
-  }
+  };
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (!prevProps.expanded && this.props.expanded) {
