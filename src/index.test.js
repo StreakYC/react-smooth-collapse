@@ -1,6 +1,7 @@
-/* @flow */
-/* @jest-environment jsdom */
-/* eslint-disable react/no-find-dom-node */
+/*
+ * @flow
+ * @jest-environment jsdom
+ */
 
 import sinon from 'sinon';
 import React, {createRef, StrictMode} from 'react';
