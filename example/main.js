@@ -1,7 +1,7 @@
 /* @flow */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
 import Example from './Example';
 
 const onReady = new Promise((resolve) => {
@@ -20,5 +20,10 @@ onReady.then(main).catch(e => {
 function main() {
   const mainDiv = document.getElementById('main');
   if (!mainDiv) throw new Error();
-  ReactDOM.render(<Example />, mainDiv);
+  const root = createRoot(mainDiv);
+  root.render(
+    <StrictMode>
+      <Example />
+    </StrictMode>
+  );
 }

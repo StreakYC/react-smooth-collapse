@@ -41,6 +41,6 @@ module.exports = {
     'space-before-blocks': ['error', 'always'],
     'keyword-spacing': ['error'],
 
-    'no-unused-vars': ['error', {'args': 'none', 'ignoreRestSiblings': true}]
+    'no-unused-vars': ['warn', {'args': 'none', 'ignoreRestSiblings': true}]
   }
 };
