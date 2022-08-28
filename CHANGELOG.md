@@ -1,3 +1,7 @@
+## 2.1.2 (2022-08-28)
+
+* Added React v18 to peerDependencies. This library wasn't affected by any React changes and works without warnings even in Strict Mode.
+
 ## 2.1.1 (2022-01-22)
 
 * Added React v17 to peerDependencies.
