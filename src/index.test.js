@@ -7,7 +7,6 @@ import sinon from 'sinon';
 import React, {createRef, StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {act} from 'react-dom/test-utils';
-import TestUtils from 'react-dom/test-utils';
 import SmoothCollapse from '../src';
 
 (global: any).IS_REACT_ACT_ENVIRONMENT = true;
@@ -44,10 +43,7 @@ test('works after starting closed', () => {
   expect(rootEl.style.transition).toBe('height .25s ease');
   expect(rootEl.style.display).toBe('none');
 
-  // TODO rip out TestUtils.scryRenderedDOMComponentsWithClass because
-  // it doesn't work with function components.
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(0);
+  expect(div.querySelectorAll('.foo')).toHaveLength(0);
 
   expect(onChangeEnd.notCalled).toBe(true);
 
@@ -72,8 +68,7 @@ test('works after starting closed', () => {
   expect(rootEl.style.transition).toBe('height 4s ease-in-out 1s');
   expect(rootEl.style.display).toBe('');
 
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.notCalled).toBe(true);
   expect(rootEl.addEventListener.calledOnce).toBe(true);
@@ -116,8 +111,7 @@ test('works after starting closed', () => {
 
   // Elements should still be there. If they were removed after being added
   // before, then they could lose any state.
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.calledOnce).toBe(true);
   expect(rootEl.addEventListener.calledTwice).toBe(true);
@@ -171,8 +165,7 @@ test('works after starting opened', () => {
   expect(smoothCollapse.state.height).toBe('auto');
   expect(rootEl.style.display).toBe('');
 
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.notCalled).toBe(true);
 
@@ -198,8 +191,7 @@ test('works after starting opened', () => {
 
   // Elements should still be there. If they were removed after being added
   // before, then they could lose any state.
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.notCalled).toBe(true);
   expect(rootEl.addEventListener.calledOnce).toBe(true);
@@ -253,8 +245,7 @@ it('works with collapse before expand finishes', () => {
   expect(smoothCollapse.state.height).toBe('0');
   expect(rootEl.style.display).toBe('none');
 
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(0);
+  expect(div.querySelectorAll('.foo')).toHaveLength(0);
 
   expect(onChangeEnd.notCalled).toBe(true);
 
@@ -277,8 +268,7 @@ it('works with collapse before expand finishes', () => {
 
   expect(rootEl.style.display).toBe('');
 
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.notCalled).toBe(true);
   expect(rootEl.addEventListener.calledOnce).toBe(true);
@@ -316,8 +306,7 @@ it('works with collapse before expand finishes', () => {
 
   // Elements should still be there. If they were removed after being added
   // before, then they could lose any state.
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.notCalled).toBe(true);
   expect(rootEl.addEventListener.calledTwice).toBe(true);
@@ -376,8 +365,7 @@ it('works after starting closed with non-zero collapsedHeight', () => {
   expect(rootEl.style.transition).toBe('height .25s ease');
   expect(rootEl.style.display).toBe('');
 
-  expect(TestUtils.scryRenderedDOMComponentsWithClass(smoothCollapse, 'foo').length)
-    .toBe(2);
+  expect(div.querySelectorAll('.foo')).toHaveLength(2);
 
   expect(onChangeEnd.notCalled).toBe(true);
 
