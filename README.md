@@ -1,5 +1,6 @@
 # react-smooth-collapse
 
+[![Node.js CI](https://github.com/StreakYC/react-smooth-collapse/actions/workflows/node.js.yml/badge.svg)](https://github.com/StreakYC/react-smooth-collapse/actions/workflows/node.js.yml)
 [![npm version](https://badge.fury.io/js/react-smooth-collapse.svg)](https://badge.fury.io/js/react-smooth-collapse)
 
 This component lets you animate the height of an element to reveal or hide its
