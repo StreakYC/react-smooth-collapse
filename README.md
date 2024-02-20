@@ -1,6 +1,5 @@
 # react-smooth-collapse
 
-[![Circle CI](https://circleci.com/gh/StreakYC/react-smooth-collapse.svg?style=shield)](https://circleci.com/gh/StreakYC/react-smooth-collapse)
 [![npm version](https://badge.fury.io/js/react-smooth-collapse.svg)](https://badge.fury.io/js/react-smooth-collapse)
 
 This component lets you animate the height of an element to reveal or hide its
@@ -17,10 +16,10 @@ You can find its code in the `example` directory. The example may be compiled
 by running:
 
 ```
-yarn
-yarn example-build
+npm i
+npm run example-build
 # or use this to auto-rebuild on changes:
-yarn example-watch
+npm run example-watch
 ```
 
 **Q:** Why would I use this when I could set a transition rule for height on an
