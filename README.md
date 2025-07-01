@@ -31,6 +31,10 @@ element, and then change the height from "auto" to "0"?
 the element's height is set to equal its current height, and then set to "0" so
 that it animates shrinking correctly.
 
+(Upcoming web standards may allow for animating from "auto" to "0" using only
+CSS, removing the need for this project. See
+https://jakearchibald.com/2025/give-footnotes-the-boot/#a-details-section.)
+
 **Q:** Couldn't I animate shrinking by setting a transition rule for
 max-height, setting max-height to a very large value when the element is
 expanded, and then set max-height to "0" when the element is collapsed?
